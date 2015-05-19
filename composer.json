@@ -1,0 +1,15 @@
+{
+    "name": "marijnvdwerf/palette",
+    "authors": [
+        {
+            "name": "Marijn van der Werf",
+            "email": "marijn.vanderwerf@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4":{
+            "marijnvdwerf\\palette\\": "src/"
+        }
+    },
+    "require": {}
+}
