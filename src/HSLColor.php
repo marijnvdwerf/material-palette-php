@@ -36,7 +36,11 @@ class HSLColor extends AbstractColor
 
     public function __toString()
     {
-        return sprintf('hsla(%d, %d%%, %d%%, %f)', $this->hue * 360, $this->saturation * 100, $this->lightness * 100, $this->alpha);
+        if ($this->alpha < 1) {
+            return sprintf('hsla(%f, %f%%, %f%%, %f)', $this->hue * 360, $this->saturation * 100, $this->lightness * 100, $this->alpha);
+        }
+
+        return sprintf('hsl(%f, %f%%, %f%%)', $this->hue * 360, $this->saturation * 100, $this->lightness * 100);
     }
 
     public function withLightness($lightness)
