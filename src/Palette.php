@@ -227,7 +227,7 @@ class Palette
             $sat = $hslColor->saturation;
             $luma = $hslColor->lightness;
 
-            if ($sat >= $minSaturation && $sat <= $maxSaturation && $luma >= $minLuma && $luma <= $maxLuma) {
+            if ($sat >= $minSaturation && $sat <= $maxSaturation && $luma >= $minLuma && $luma <= $maxLuma && !$this->isAlreadySelected($swatch)) {
                 $value = self::createComparisonValue($sat, $targetSaturation, $luma, $targetLuma, $swatch->getPopulation(), $this->highestPopulation);
                 if ($max === null || $value > $maxValue) {
                     $max = $swatch;
@@ -237,6 +237,16 @@ class Palette
         }
 
         return $max;
+    }
+
+    private function isAlreadySelected(Swatch $swatch)
+    {
+        return $swatch == $this->vibrantSwatch
+        || $swatch == $this->lightVibrantSwatch
+        || $swatch == $this->darkVibrantSwatch
+        || $swatch == $this->mutedSwatch
+        || $swatch == $this->lightMutedSwatch
+        || $swatch == $this->darkMutedSwatch;
     }
 
 
