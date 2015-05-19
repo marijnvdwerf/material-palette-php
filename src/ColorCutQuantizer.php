@@ -98,11 +98,11 @@ class Vbox
         }, $this->swatches);
 
         $greens = array_map(function (Swatch $swatch) {
-            return $swatch->getColor()->asRGBColor()->red;
+            return $swatch->getColor()->asRGBColor()->green;
         }, $this->swatches);
 
         $blues = array_map(function (Swatch $swatch) {
-            return $swatch->getColor()->asRGBColor()->red;
+            return $swatch->getColor()->asRGBColor()->blue;
         }, $this->swatches);
 
 
@@ -176,11 +176,11 @@ class Vbox
     {
         switch ($component) {
             case 'blue':
-                $order = ['red', 'green', 'blue'];
+                $order = ['blue', 'green', 'red'];
                 break;
 
             case 'green':
-                $order = ['red', 'green', 'blue'];
+                $order = ['green', 'red', 'blue'];
                 break;
 
             case 'red':
@@ -209,11 +209,11 @@ class Vbox
         }, $this->swatches);
 
         $greens = array_map(function (Swatch $swatch) {
-            return $swatch->getColor()->asRGBColor()->red;
+            return $swatch->getColor()->asRGBColor()->green;
         }, $this->swatches);
 
         $blues = array_map(function (Swatch $swatch) {
-            return $swatch->getColor()->asRGBColor()->red;
+            return $swatch->getColor()->asRGBColor()->blue;
         }, $this->swatches);
 
         $redLength = max($reds) - min($reds);
