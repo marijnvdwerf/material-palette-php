@@ -2,6 +2,8 @@
 
 namespace marijnvdwerf\palette;
 
+use Intervention\Image\Image;
+
 class Palette
 {
     const TARGET_DARK_LUMA = 0.26;
@@ -49,22 +51,27 @@ class Palette
     private $darkMutedSwatch;
 
     /**
+     * @param Image $image
+     * @return Palette
+     */
+    public static function generate(Image $image)
+    {
+        return PaletteGenerator::getInstance()->generate($image);
+    }
+
+    /**
      * @param $swatches Swatch[]
      * @return Palette
      */
-    public static function generate($swatches)
+    public function __construct($swatches)
     {
-        $palette = new Palette();
-        $palette->swatches = $swatches;
-        $palette->highestPopulation = $palette->findMaxPopulation();
+        $this->swatches = $swatches;
+        $this->highestPopulation = $this->findMaxPopulation();
 
-        $palette->generateVariationColors();
-
+        $this->generateVariationColors();
 
         // Now try and generate any missing colors
-        $palette->generateEmptySwatches();
-
-        return $palette;
+        $this->generateEmptySwatches();
     }
 
     private function findMaxPopulation()

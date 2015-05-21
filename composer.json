@@ -1,15 +1,23 @@
 {
-    "name": "marijnvdwerf/material-palette",
-    "authors": [
-        {
-            "name": "Marijn van der Werf",
-            "email": "marijn.vanderwerf@gmail.com"
-        }
-    ],
-    "autoload": {
-        "psr-4":{
-            "marijnvdwerf\\palette\\": "src/"
-        }
-    },
-    "require": {}
+  "name": "marijnvdwerf/material-palette",
+  "authors": [
+    {
+      "name": "Marijn van der Werf",
+      "email": "mail@marijnvdwerf.nl",
+      "homepage": "http://marijnvdwerf.nl"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "marijnvdwerf\\palette\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=5.3.2",
+    "intervention/image": "~2.2"
+  },
+  "suggest": {
+    "ext-gd": "to use the GD implementation",
+    "ext-imagick": "to use the Imagick implementation"
+  }
 }

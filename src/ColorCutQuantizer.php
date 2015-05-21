@@ -28,7 +28,7 @@ class ColorCutQuantizer
             $vbox = $pq->extract();
 
             if (!$vbox->canSplit()) {
-// No more boxes to split, so break;
+                // No more boxes to split, so break;
                 break;
             }
 
@@ -233,6 +233,5 @@ class Vbox
     {
         return sprintf('[VBox count:%d volume:%f]', count($this->swatches), $this->getVolume());
     }
-
 
 }

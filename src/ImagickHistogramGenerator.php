@@ -3,7 +3,10 @@
 namespace marijnvdwerf\palette;
 
 
-class ImagickHistogramGenerator
+use Imagick;
+use Intervention\Image\Image;
+
+class ImagickHistogramGenerator extends HistogramGenerator
 {
     /**
      * @param \ImagickPixel $pixel
@@ -16,11 +19,29 @@ class ImagickHistogramGenerator
 
 
     /**
-     * @return Swatch[]
+     * @inheritdoc
      */
-    public function generate(\Imagick $image)
+    public function generate(Image $input)
     {
-        return array_map([$this, 'swatchForPixel'], $image->getImageHistogram());
+        $srcImage = $input->getCore();
+        if (!$srcImage instanceof Imagick) {
+            throw new \Exception('This class only supports generating histograms for Imagick images');
+        }
+
+        $image = $srcImage;
+
+        if ($image->getImageWidth() > 100 || $image->getImageHeight() > 100) {
+            $image = clone $srcImage;
+            $image->resizeImage(100, 100, Imagick::FILTER_POINT, 1);
+        }
+
+        $histogram = array_map([$this, 'swatchForPixel'], $image->getImageHistogram());
+
+        if ($image !== $srcImage) {
+            $image->destroy();
+        }
+
+        return $histogram;
     }
 
 }

@@ -1,36 +1,58 @@
 <?php
 
-use marijnvdwerf\palette\ImagickHistogramGenerator;
+use Intervention\Image\ImageManager;
 use marijnvdwerf\palette\Palette;
 use marijnvdwerf\palette\Swatch;
 
 require 'vendor/autoload.php';
 
-$histogramGenerator = new ImagickHistogramGenerator();
-$colorQuantizer = new \marijnvdwerf\palette\ColorCutQuantizer();
+?>
+    <style type="text/css">
+        body {
+            font-family: Roboto, sans-serif;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-$files = scandir('./specs/artwork');
-foreach ($files as $file) {
-    if ($file[0] === '.') {
+        .swatch {
+            padding: 15px;
+            list-style-type: none;
+        }
+
+        .swatch__color {
+            float: right;
+        }
+
+        .album {
+            width: 320px;
+        }
+    </style>
+
+<?php
+$basePath = './specs/artwork';
+$files = scandir($basePath);
+
+$manager = new ImageManager(array('driver' => 'imagick'));
+foreach ($files as $filename) {
+    if ($filename[0] === '.') {
         continue;
     }
 
-    $image = new Imagick('./specs/artwork/' . $file);
+    $image = $manager->make($basePath . '/' . $filename);
 
-    $image->sampleImage(100, 100);
+    $palette = Palette::generate($image);
 
-    $image->setFormat('png');
 
-    $swatches = $histogramGenerator->generate($image);
-
-    $swatches = $colorQuantizer->quantize($swatches, 16);
-
-    //$palette = Palette::generate($swatches);
-
-    echo '<h1>' . $file . '</h1>';
-    echo "<img src='data:image/png;base64," . base64_encode($image->getImageBlob()) . "' />";
-    printSwatches($swatches);
+    echo '<div class="album">';
+    echo "<img src='data:image/png;base64," . base64_encode($image->encode('png')) . "' />";
+    echo '<h1>' . $filename . '</h1>';
+    printPalette($palette);
+    //printSwatches($swatches);
+    echo '</div>';
 }
 
 
@@ -61,7 +83,7 @@ function printPalette(Palette $palette)
 
             $swatchName = implode(' ', array_filter([$v2, $v1]));
             if ($swatch !== null) {
-                echo sprintf('<li class="swatch" style="background-color: %s">%s</li>', $swatch->getColor(), $swatchName);
+                echo sprintf('<li class="swatch" style="background-color: %1$s"><span class="swatch__name">%2$s</span> <span class="swatch__color">%1$s</span></li>', $swatch->getColor(), $swatchName);
             } else {
                 echo sprintf('<li class="swatch swatch--empty">%s</li>', $swatchName);
             }
@@ -70,3 +92,4 @@ function printPalette(Palette $palette)
     }
     echo '</ul>';
 }
+
