@@ -3,6 +3,9 @@
 namespace marijnvdwerf\palette;
 
 
+use marijnvdwerf\palette\Color\HSLColor;
+use marijnvdwerf\palette\Color\RGBColor;
+
 class ColorCutQuantizer
 {
     const BLACK_MAX_LIGHTNESS = 0.05;
@@ -93,18 +96,7 @@ class Vbox
 
     public function getVolume()
     {
-        $reds = array_map(function (Swatch $swatch) {
-            return $swatch->getColor()->asRGBColor()->red;
-        }, $this->swatches);
-
-        $greens = array_map(function (Swatch $swatch) {
-            return $swatch->getColor()->asRGBColor()->green;
-        }, $this->swatches);
-
-        $blues = array_map(function (Swatch $swatch) {
-            return $swatch->getColor()->asRGBColor()->blue;
-        }, $this->swatches);
-
+        list($reds, $greens, $blues) = $this->getColorComponents('red', 'green', 'blue');
 
         return (max($reds) - min($reds) + 1) * (max($greens) - min($greens) + 1) * (max($blues) - min($blues) + 1);
     }
@@ -202,19 +194,22 @@ class Vbox
         };
     }
 
+    private function getColorComponents()
+    {
+        $components = func_get_args();
+        $output = [];
+        foreach ($components as $component) {
+            $output[] = array_map(function (Swatch $swatch) use ($component) {
+                return $swatch->getColor()->asRGBColor()->$component;
+            }, $this->swatches);
+        }
+
+        return $output;
+    }
+
     private function getLongestColorDimension()
     {
-        $reds = array_map(function (Swatch $swatch) {
-            return $swatch->getColor()->asRGBColor()->red;
-        }, $this->swatches);
-
-        $greens = array_map(function (Swatch $swatch) {
-            return $swatch->getColor()->asRGBColor()->green;
-        }, $this->swatches);
-
-        $blues = array_map(function (Swatch $swatch) {
-            return $swatch->getColor()->asRGBColor()->blue;
-        }, $this->swatches);
+        list($reds, $greens, $blues) = $this->getColorComponents('red', 'green', 'blue');
 
         $redLength = max($reds) - min($reds);
         $greenLength = max($greens) - min($greens);

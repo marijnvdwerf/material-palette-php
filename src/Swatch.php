@@ -2,6 +2,7 @@
 
 namespace marijnvdwerf\palette;
 
+use marijnvdwerf\palette\Color\AbstractColor;
 
 class Swatch
 {

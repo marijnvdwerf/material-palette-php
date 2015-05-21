@@ -5,6 +5,7 @@ namespace marijnvdwerf\palette;
 
 use Imagick;
 use Intervention\Image\Image;
+use marijnvdwerf\palette\Color\RGBColor;
 
 class ImagickHistogramGenerator extends HistogramGenerator
 {
@@ -14,7 +15,8 @@ class ImagickHistogramGenerator extends HistogramGenerator
      */
     private function swatchForPixel(\ImagickPixel $pixel)
     {
-        return new Swatch(RGBColor::initWithImagickColor($pixel->getColor(true)), $pixel->getColorCount());
+        $color = $pixel->getColor(true);
+        return new Swatch(new RGBColor($color['r'], $color['g'], $color['b'], $color['a']), $pixel->getColorCount());
     }
 
 
