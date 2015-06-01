@@ -1,5 +1,17 @@
 {
   "name": "marijnvdwerf/material-palette",
+  "description": "Prominent image colour extraction for PHP",
+  "homepage": "https://github.com/marijnvdwerf/material-palette-php",
+  "keywords": [
+    "colour",
+    "color",
+    "material",
+    "material-design",
+    "material design",
+    "image",
+    "palette"
+  ],
+  "license": "MIT",
   "authors": [
     {
       "name": "Marijn van der Werf",
