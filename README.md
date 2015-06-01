@@ -6,6 +6,12 @@ Palette for PHP
 **Palette** is a port of the Android library of the same name, for extracting a colour palette from an image. The
 results can then be used for tinting the interface to match the image.
 
+Installation
+------------
+```bash
+$ composer require 'marijnvdwerf/material-palette:~1.0'
+```
+
 Usage
 -----
 Palette makes use of the [Intervention image library](https://github.com/Intervention/image) to load images, and supports
