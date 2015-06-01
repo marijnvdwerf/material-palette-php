@@ -130,4 +130,12 @@ class RGBColor extends AbstractColor
         return parent::__get($name);
     }
 
+    public function toHex()
+    {
+        $r = round($this->_red * 255);
+        $g = round($this->_green * 255);
+        $b = round($this->_blue * 255);
+        return sprintf('#%02X%02X%02X', $r, $g, $b);
+    }
+
 }

@@ -13,11 +13,16 @@
     }
   },
   "require": {
-    "php": ">=5.3.2",
+    "php": "~5.3",
     "intervention/image": "~2.2"
   },
   "suggest": {
     "ext-gd": "to use the GD implementation",
     "ext-imagick": "to use the Imagick implementation"
+  },
+  "require-dev": {
+    "devster/ubench": "^1.1",
+    "symfony/debug": "~2.6",
+    "symfony/var-dumper": "~2.6"
   }
 }
