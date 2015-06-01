@@ -3,6 +3,7 @@
 namespace marijnvdwerf\palette;
 
 use Intervention\Image\Image;
+use marijnvdwerf\palette\Color\RGBColor;
 
 class GDHistogramGenerator extends HistogramGenerator
 {
