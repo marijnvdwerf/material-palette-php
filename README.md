@@ -17,7 +17,7 @@ $image = $manager->make('path/to/image.png');
 
 $palette = Palette::generate($image);
 echo $palette->getVibrantSwatch()->getColor();
-``
+```
 
 Contrast
 --------
