@@ -14,6 +14,8 @@ class RGBColor extends AbstractColor
     protected $_green;
     protected $_blue;
 
+    private $_integerValue = null;
+
     public function __construct($r, $g, $b, $a = 1)
     {
         $this->_red = $r;
@@ -138,4 +140,12 @@ class RGBColor extends AbstractColor
         return sprintf('#%02X%02X%02X', $r, $g, $b);
     }
 
+    public function asInteger()
+    {
+        if ($this->_integerValue === null) {
+            $this->_integerValue = (round($this->_red * 255) << 16) | (round($this->_green * 255) << 8) | (round($this->_blue * 255));
+        }
+
+        return $this->_integerValue;
+    }
 }

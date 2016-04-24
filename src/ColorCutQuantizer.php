@@ -82,6 +82,9 @@ class ColorCutQuantizer
 
 class Vbox
 {
+    const COMPONENT_BLUE = 0x0000FF;
+    const COMPONENT_GREEN = 0x00FF00;
+    const COMPONENT_RED = 0xFF0000;
     /** @var Swatch[] */
     private $swatches;
 
@@ -168,25 +171,27 @@ class Vbox
     {
         switch ($component) {
             case 'blue':
-                $order = ['blue', 'green', 'red'];
+                $order = [self::COMPONENT_BLUE, self::COMPONENT_GREEN, self::COMPONENT_RED];
                 break;
 
             case 'green':
-                $order = ['green', 'red', 'blue'];
+                $order = [self::COMPONENT_GREEN, self::COMPONENT_RED, self::COMPONENT_BLUE];
                 break;
 
             case 'red':
             default:
-                $order = ['red', 'green', 'blue'];
+                $order = [self::COMPONENT_RED, self::COMPONENT_GREEN, self::COMPONENT_BLUE];
                 break;
         }
 
         return function (Swatch $lhs, Swatch $rhs) use ($order) {
-            $lhsRGB = $lhs->getColor()->asRGBColor();
-            $rhsRGB = $rhs->getColor()->asRGBColor();
+            $lhsRGB = $lhs->getColor()->asRGBColor()->asInteger();
+            $rhsRGB = $rhs->getColor()->asRGBColor()->asInteger();
             foreach ($order as $component) {
-                if ($lhsRGB->$component != $rhsRGB->$component) {
-                    return $lhsRGB->$component < $rhsRGB->$component ? -1 : 1;
+                $lhsComponent = ($lhsRGB & $component);
+                $rhsComponent = ($rhsRGB & $component);
+                if ($lhsComponent != $rhsComponent) {
+                    return $lhsComponent < $rhsComponent ? -1 : 1;
                 }
             }
 
