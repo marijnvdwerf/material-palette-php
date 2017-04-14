@@ -22,6 +22,15 @@ class RGBColor extends AbstractColor
         $this->_alpha = $a;
     }
 
+    public static function fromHex($int)
+    {
+        return new RGBColor(
+            (($int >> 16) & 0xFF) / 255,
+            (($int >> 8) & 0xFF) / 255,
+            ($int & 0xFF) / 255
+        );
+    }
+
     public function __toString()
     {
         if ($this->_alpha < 1) {
@@ -60,7 +69,7 @@ class RGBColor extends AbstractColor
         } else {
             switch ($max) {
                 case $this->_red:
-                    $h = (($this->_green - $this->_blue) / $deltaMaxMin) % 6;
+                    $h = fmod(($this->_green - $this->_blue)/ $deltaMaxMin, 6);
                     break;
 
                 case $this->_green:
