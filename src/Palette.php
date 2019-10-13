@@ -126,7 +126,7 @@ class Palette
 
         if ($this->darkVibrantSwatch === null) {
             // If we do not have a dark vibrant color...
-            if ($this->darkVibrantSwatch !== null) {
+            if ($this->vibrantSwatch !== null) {
                 // ...but we do have a vibrant, generate the value by modifying the luma
                 $newColor = $this->vibrantSwatch->getColor()->asHSLColor()
                     ->withLightness(self::TARGET_DARK_LUMA);
