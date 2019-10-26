@@ -30,7 +30,7 @@
     }
   },
   "require": {
-    "php": ">=5.3",
+    "php": ">=5.4",
     "intervention/image": "~2.2"
   },
   "suggest": {
@@ -42,5 +42,8 @@
     "phpunit/phpunit": "^6.1",
     "symfony/debug": "~2.6",
     "symfony/var-dumper": "~2.6"
+  },
+  "scripts": {
+    "test": "phpunit"
   }
 }
