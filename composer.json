@@ -42,5 +42,8 @@
     "phpunit/phpunit": "^6.1",
     "symfony/debug": "~2.6",
     "symfony/var-dumper": "~2.6"
+  },
+  "scripts": {
+    "test": "phpunit"
   }
 }
