@@ -30,7 +30,7 @@
     }
   },
   "require": {
-    "php": ">=5.3",
+    "php": ">=5.4",
     "intervention/image": "~2.2"
   },
   "suggest": {
