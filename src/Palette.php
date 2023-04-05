@@ -76,6 +76,9 @@ class Palette
 
     private function findMaxPopulation()
     {
+        if (!$this->swatches) {
+            return null;
+        }
         return max(array_map(function (Swatch $swatch) {
             return $swatch->getPopulation();
         }, $this->swatches));
