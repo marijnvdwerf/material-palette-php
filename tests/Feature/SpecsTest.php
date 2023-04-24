@@ -1,6 +1,6 @@
 <?php
 
-namespace marijnvdwerf\palette\Tests;
+namespace marijnvdwerf\palette\Tests\Feature;
 
 use Intervention\Image\ImageManager;
 use marijnvdwerf\palette\Palette;
@@ -8,13 +8,28 @@ use PHPUnit\Framework\TestCase;
 
 class SpecsTest extends TestCase
 {
+    private $manager;
+
+    protected function setUp(): void
+    {
+        $driver = getenv('IMAGE_DRIVER');
+        if (!$driver) {
+            $driver = 'gd';
+        }
+
+        if ($driver !== 'gd') {
+            $this->markTestSkipped('These specs only match the GD output');
+        }
+
+        $this->manager = new ImageManager(['driver'=>$driver]);
+    }
+
     /**
      * @dataProvider specsProvider
      */
     public function testSpecsImage($title, array $expected)
     {
-        $manager = new ImageManager();
-        $image = $manager->make(__DIR__ . '/../specs/artwork/' . $title . '.png');
+        $image = $this->manager->make(__DIR__ . '/../../specs/artwork/' . $title . '.png');
         $palette = Palette::generate($image);
 
         $funcs = [
@@ -41,7 +56,7 @@ class SpecsTest extends TestCase
         }
     }
 
-    public function specsProvider()
+    public static function specsProvider()
     {
         return [
             [

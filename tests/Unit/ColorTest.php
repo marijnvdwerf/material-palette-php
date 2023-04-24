@@ -1,6 +1,6 @@
 <?php
 
-namespace marijnvdwerf\palette\Tests;
+namespace marijnvdwerf\palette\Tests\Unit;
 
 use marijnvdwerf\palette\Color\HSLColor;
 use marijnvdwerf\palette\Color\RGBColor;
