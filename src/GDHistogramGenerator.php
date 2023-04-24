@@ -25,7 +25,11 @@ class GDHistogramGenerator extends HistogramGenerator
     {
         $image = $input->getCore();
 
-        if (!(is_resource($image) && get_resource_type($image) === 'gd')) {
+        if (is_object($image) && get_class($image) === 'GdImage') {
+            // pass
+        } elseif (is_resource($image) && get_resource_type($image) === 'gd') {
+            // pass
+        } else {
             throw new \Exception('This generator only support images using the GD driver');
         }
 
