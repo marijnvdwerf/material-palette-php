@@ -39,11 +39,14 @@
   },
   "require-dev": {
     "devster/ubench": "^1.1",
-    "phpunit/phpunit": "^6.1",
-    "symfony/debug": "~2.6",
-    "symfony/var-dumper": "~2.6"
+    "phpunit/phpunit": "^9 | ^10",
+    "symfony/error-handler": "^6.2",
+    "symfony/var-dumper": "^6.2"
   },
   "scripts": {
     "test": "phpunit"
+  },
+  "config": {
+    "sort-packages": true
   }
 }
