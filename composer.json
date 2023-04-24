@@ -40,8 +40,8 @@
   "require-dev": {
     "devster/ubench": "^1.1",
     "phpunit/phpunit": "^9 | ^10",
-    "symfony/error-handler": "^6.2",
-    "symfony/var-dumper": "^6.2"
+    "symfony/error-handler": "^5 | ^6",
+    "symfony/var-dumper": "^5 | ^6"
   },
   "scripts": {
     "test": "phpunit"
