@@ -5,7 +5,7 @@ use marijnvdwerf\palette\Color\AbstractColor;
 use marijnvdwerf\palette\Color\RGBColor;
 use marijnvdwerf\palette\Palette;
 use marijnvdwerf\palette\Swatch;
-use Symfony\Component\Debug\Debug;
+use Symfony\Component\ErrorHandler\Debug;
 
 require 'vendor/autoload.php';
 
@@ -17,7 +17,7 @@ $albumWidth = ($containerWidth - $gutter * ($columns - 1)) / $columns;
 
 set_time_limit(0);
 
-Debug::enable(E_ALL);
+Debug::enable();
 
 ?>
     <style type="text/css">

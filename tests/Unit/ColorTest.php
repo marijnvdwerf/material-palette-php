@@ -1,6 +1,6 @@
 <?php
 
-namespace marijnvdwerf\palette\Tests;
+namespace marijnvdwerf\palette\Tests\Unit;
 
 use marijnvdwerf\palette\Color\HSLColor;
 use marijnvdwerf\palette\Color\RGBColor;
@@ -21,9 +21,11 @@ class ColorTest extends TestCase
         $this->assertSame('rgb(204, 128, 51)', (string)$color);
 
         $hsl = $color->asHSLColor();
-        $this->assertEquals(30 / 360, $hsl->getHue(), 'Hue not within offset', self::ALLOWED_OFFSET_HUE);
-        $this->assertEquals(0.6, $hsl->getSaturation(), 'Saturation not within offset', self::ALLOWED_OFFSET_SATURATION);
-        $this->assertEquals(0.5, $hsl->getLightness(), 'Lightness not within offset', self::ALLOWED_OFFSET_LIGHTNESS);
+        $this->assertEqualsWithDelta(30 / 360, $hsl->getHue(), self::ALLOWED_OFFSET_HUE, 'Hue not within offset');
+        $this->assertEqualsWithDelta(0.6, $hsl->getSaturation(), self::ALLOWED_OFFSET_SATURATION,
+            'Saturation not within offset');
+        $this->assertEqualsWithDelta(0.5, $hsl->getLightness(), self::ALLOWED_OFFSET_LIGHTNESS,
+            'Lightness not within offset');
     }
 
     public function rgbHslDataprovider()
@@ -48,11 +50,11 @@ class ColorTest extends TestCase
     {
         $actual = $color->asHSLColor();
 
-        $this->assertEquals($expected->getHue(), $actual->getHue(), 'Hue not within offset',
-            self::ALLOWED_OFFSET_HUE);
-        $this->assertEquals($expected->getSaturation(), $actual->getSaturation(), 'Saturation not within offset',
-            self::ALLOWED_OFFSET_SATURATION);
-        $this->assertEquals($expected->getLightness(), $actual->getLightness(), 'Lightness not within offset',
-            self::ALLOWED_OFFSET_LIGHTNESS);
+        $this->assertEqualsWithDelta($expected->getHue(), $actual->getHue(), self::ALLOWED_OFFSET_HUE,
+            'Hue not within offset');
+        $this->assertEqualsWithDelta($expected->getSaturation(), $actual->getSaturation(),
+            self::ALLOWED_OFFSET_SATURATION, 'Saturation not within offset');
+        $this->assertEqualsWithDelta($expected->getLightness(), $actual->getLightness(), self::ALLOWED_OFFSET_LIGHTNESS,
+            'Lightness not within offset');
     }
 }
