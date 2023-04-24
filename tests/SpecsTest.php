@@ -13,11 +13,7 @@ class SpecsTest extends TestCase
      */
     public function testSpecsImage($title, array $expected)
     {
-        $config = [];
-        if (getenv('IMAGE_DRIVER')) {
-            $config['driver'] = getenv('IMAGE_DRIVER');
-        }
-        $manager = new ImageManager($config);
+        $manager = new ImageManager();
         $image = $manager->make(__DIR__ . '/../specs/artwork/' . $title . '.png');
         $palette = Palette::generate($image);
 
